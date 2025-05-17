@@ -13,4 +13,18 @@ struct TranscationsModel : Identifiable {
     let date : Date
     let amount : Double
     
+    var displayDate : String {
+     let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        return dateFormatter.string(from: date)
+        
+    }
+    
+    var displayAmount : String{
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        return numberFormatter.string(from: NSNumber(value: amount)) ?? ""
+    }
+    
+    
 }
