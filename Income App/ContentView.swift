@@ -140,6 +140,15 @@ struct ContentView: View {
     }
     
      var body: some View {
+        
+         VStack{
+             Image(systemName: "gearshape.fill")
+             .resizable()
+             .frame(width: 30, height: 30)
+             .frame(maxWidth: .infinity, alignment: .trailing)
+             .padding(.horizontal, 20)
+         }
+         
         NavigationStack{
             VStack{
                 BalanceView()
