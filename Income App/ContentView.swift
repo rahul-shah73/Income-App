@@ -139,7 +139,7 @@ struct ContentView: View {
         }
     }
     
-    var body: some View {
+     var body: some View {
         NavigationStack{
             VStack{
                 BalanceView()
@@ -156,7 +156,9 @@ struct ContentView: View {
                         
                         
                     }
+                    .onDelete(perform: deleteTransactions)
                 }
+            
                 //.scrollDisabled(true)
                 .scrollContentBackground(.hidden)
                 FloatingButton()
@@ -169,6 +171,9 @@ struct ContentView: View {
                 AddTransactionView(transactions: $transactions)
             }
         }
+    }
+    private func deleteTransactions(at offSets : IndexSet){
+        transactions.remove(atOffsets : offSets)
     }
 }
 
