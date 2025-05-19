@@ -69,16 +69,25 @@ struct ContentView: View {
         
     
     var body: some View {
-      
-        VStack{
-            BalanceView()
-            List{
-                
-                ForEach(transactions ){
-                    transaction in
-                    TransactionView(transaction :   transaction )
+        NavigationStack{
+            VStack{
+                BalanceView()
+                List{
                     
-                    
+                    ForEach(transactions ){
+                        transaction in
+                        
+                        
+                        Button(action:{
+                            showAddTransactionView = true
+                            
+                        } , label:{
+                            TransactionView(transaction :   transaction )
+                                .foregroundStyle(Color.black)
+                        })
+                        
+                        
+                    }
                 }
             }
             //.scrollDisabled(true)
