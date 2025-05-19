@@ -14,59 +14,130 @@ struct ContentView: View {
         TranscationsModel(name: "Salary",type: .income, date: Date(), amount: 2.50)
         
     ]
+    @State var showAddTransactionView = false
     
-    fileprivate  func BalanceView() -> some View {
-        ZStack{
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color.forestGray)
-                .frame(height: 170)
-                .shadow(color: .black, radius: 8, y: 8)
-                .padding(10)
-            HStack{
-                VStack(alignment: .leading){
-                    HStack{
-                        VStack{
-                            Text("BALANCE")
-                                .font(.system(size: 20))
-                                .font(.caption)
-                                .foregroundStyle(.white)
-                            
-                            
-                            Text("₹25")
-                                .font(.system(size: 42, weight: .semibold))
-                                .foregroundStyle(.white)
-                            
-                        }
-                    }
-                    HStack(spacing: 35){
-                        VStack(alignment: .leading){
-                            Text("Expense")
-                                .font(.system(size:15, weight: .semibold))
-                                .foregroundStyle(Color.white)
-                            
-                            Text("₹20")
-                                .font(.system(size:15, weight: .regular))
-                                .foregroundStyle(Color.white)
-                        }
-                        // .padding(.horizontal,40)
-                        VStack(alignment: .leading){
-                            Text("Income")
-                                .font(.system(size:15, weight: .semibold))
-                                .foregroundStyle(Color.white)
-                            
-                            Text("₹50")
-                                .font(.system(size:15, weight: .regular))
-                                .foregroundStyle(Color.white)
-                        }
-                    }
-                }
-                .padding(.leading,20)
-                Spacer()
-                    
+    @State var transactionToEdit: TranscationsModel?
+    
+    var income : String {
+        var sumIncome = 0.00
+        for transaction in transactions {
+            if transaction.type == .income {
+                sumIncome += transaction.amount
             }
         }
-    }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        return numberFormatter.string(from:sumIncome as  NSNumber) ?? "0.00"
         
+    }
+    
+    var expense : String {
+        var sumExpense = 0.00
+        for transaction in transactions {
+            if transaction.type == .expense {
+                sumExpense += transaction.amount
+            }
+        }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        return numberFormatter.string(from:sumExpense as  NSNumber) ?? "0.00"
+        
+    }
+    
+    
+    var totalBalance : String{
+         var total = 0.00
+        for transaction in transactions {
+            switch transaction.type {
+                case .income:
+                total += transaction.amount
+            case .expense:
+                total -= transaction.amount
+            }
+        }
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        return numberFormatter.string(from:total as NSNumber) ?? "0.00"
+        
+    }
+    
+    
+    
+    fileprivate func FloatingButton() -> some View{
+        VStack{
+            NavigationLink (destination:AddTransactionView(transactions: $transactions), label: {
+                Text("+")
+                    .font(.system(size: 25, weight : . regular))
+                    .frame(width: 75, height: 75)
+                    .foregroundStyle(.white)
+                
+            })
+            
+            .background(Color.forestGray)
+            .clipShape(Circle())
+            
+            
+        }
+    }
+    
+   
+    
+    
+    fileprivate  func BalanceView() -> some View {
+        NavigationStack{
+            ZStack{
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(Color.forestGray)
+                    .frame(height: 170)
+                    .shadow(color: .black, radius: 8, y: 8)
+                    .padding(10)
+                HStack{
+                    VStack(alignment: .leading){
+                        HStack{
+                            VStack{
+                                Text("BALANCE")
+                                    .font(.system(size: 20))
+                                    .font(.caption)
+                                    .foregroundStyle(.white)
+                                
+                                
+                                Text("\(totalBalance)")
+                                    .font(.system(size: 42, weight: .semibold))
+                                    .foregroundStyle(.white)
+                            }
+                        }
+                        HStack(spacing: 35){
+                            VStack(alignment: .leading){
+                                Text("Expense")
+                                    .font(.system(size:15, weight: .semibold))
+                                    .foregroundStyle(Color.white)
+                                
+                                Text("\(expense)")
+                                    .font(.system(size:15, weight: .regular))
+                                    .foregroundStyle(Color.white)
+                            }
+                            // .padding(.horizontal,40)
+                            VStack(alignment: .leading){
+                                Text("Income")
+                                    .font(.system(size:15, weight: .semibold))
+                                    .foregroundStyle(Color.white)
+                                
+                                Text("\(income)")
+                                    .font(.system(size:15, weight: .regular))
+                                    .foregroundStyle(Color.white)
+                            }
+                        }
+                    }
+                    .padding(.leading,20)
+                    Spacer()
+                    
+                }
+                
+            }
+            
+            
+        }
+    }
     
     var body: some View {
         NavigationStack{
@@ -76,12 +147,9 @@ struct ContentView: View {
                     
                     ForEach(transactions ){
                         transaction in
-                        
-                        
-                        Button(action:{
-                            showAddTransactionView = true
-                            
-                        } , label:{
+                      Button(action:{
+                            transactionToEdit = transaction
+                      } , label:{
                             TransactionView(transaction :   transaction )
                                 .foregroundStyle(Color.black)
                         })
@@ -89,14 +157,18 @@ struct ContentView: View {
                         
                     }
                 }
+                //.scrollDisabled(true)
+                .scrollContentBackground(.hidden)
+                FloatingButton()
             }
-            //.scrollDisabled(true)
-            .scrollContentBackground(.hidden)
+            
+            .navigationDestination(item: $transactionToEdit, destination: { transactionToEdit in
+                AddTransactionView(transactions: $transactions, transactionToEdit : transactionToEdit)
+            })
+            .navigationDestination(isPresented: $showAddTransactionView) {
+                AddTransactionView(transactions: $transactions)
+            }
         }
-      
-                
-             
-         
     }
 }
 

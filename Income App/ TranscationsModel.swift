@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct TranscationsModel : Identifiable {
+struct TranscationsModel : Identifiable, Hashable {
     let id =  UUID()
     let name : String
     let type : TransactionType
