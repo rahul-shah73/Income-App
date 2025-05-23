@@ -96,6 +96,7 @@ struct ContentView: View {
                         HStack{
                             VStack{
                                 Text("BALANCE")
+                                
                                     .font(.system(size: 20))
                                     .font(.caption)
                                     .foregroundStyle(.white)
@@ -131,6 +132,8 @@ struct ContentView: View {
                     .padding(.leading,20)
                     Spacer()
                     
+                    //it will slides the things up
+                    
                 }
                 
             }
@@ -143,6 +146,7 @@ struct ContentView: View {
         
          VStack{
              Image(systemName: "gearshape.fill")
+                
              .resizable()
              .frame(width: 30, height: 30)
              .frame(maxWidth: .infinity, alignment: .trailing)
