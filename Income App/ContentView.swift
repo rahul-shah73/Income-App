@@ -18,6 +18,8 @@ struct ContentView: View {
     
     @State var transactionToEdit: TranscationsModel?
     
+    @State var showSettingsView = false
+    
     var income : String {
         var sumIncome = 0.00
         for transaction in transactions {
@@ -144,16 +146,24 @@ struct ContentView: View {
     
      var body: some View {
         
-         VStack{
-             Image(systemName: "gearshape.fill")
-                
-             .resizable()
-             .frame(width: 30, height: 30)
-             .frame(maxWidth: .infinity, alignment: .trailing)
-             .padding(.horizontal, 20)
-         }
+        
          
         NavigationStack{
+           
+            VStack{
+               
+                Button(action: { showSettingsView = true}, label: {
+                    Image(systemName: "gearshape.fill")
+                        .resizable()
+                        .foregroundStyle(Color.gray)
+                        .frame(width: 30, height: 30)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.horizontal, 20)
+                })
+               
+                   
+               
+            }
             VStack{
                 BalanceView()
                 List{
@@ -183,7 +193,12 @@ struct ContentView: View {
             .navigationDestination(isPresented: $showAddTransactionView) {
                 AddTransactionView(transactions: $transactions)
             }
+            
+            .navigationDestination(isPresented: $showSettingsView, destination: {
+                SettingView()
+            })
         }
+                                   
     }
     private func deleteTransactions(at offSets : IndexSet){
         transactions.remove(atOffsets : offSets)
