@@ -23,11 +23,14 @@ struct AddTransactionView: View {
     
     @Binding var transactions : [TranscationsModel]
     
+    @AppStorage("currency") var currency: Currency = .ruppee
+    
     var transactionToEdit : TranscationsModel?
     
     var numberFormatter : NumberFormatter {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
+        numberFormatter.locale = currency.locale
         return numberFormatter
     }
     var body: some View {

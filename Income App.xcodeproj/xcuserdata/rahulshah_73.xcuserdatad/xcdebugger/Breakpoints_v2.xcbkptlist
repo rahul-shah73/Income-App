@@ -34,11 +34,11 @@
                   endingLineNumber = "0">
                </Location>
                <Location
-                  uuid = "D3D46D97-F644-4CBF-BC39-23E51192D28C - 4d573fa6036f7aa0"
+                  uuid = "D3D46D97-F644-4CBF-BC39-23E51192D28C - b3caa5887138099b"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Income_App.ContentView.init(showAddTransactionView: Swift.Bool, transactionToEdit: Swift.Optional&lt;Income_App.TranscationsModel&gt;) -&gt; Income_App.ContentView"
+                  symbolName = "Income_App.ContentView.init(showAddTransactionView: Swift.Bool, transactionToEdit: Swift.Optional&lt;Income_App.TranscationsModel&gt;, showSettingsView: Swift.Bool, orderDescinding: Swift.Bool, filterMinimum: Swift.Double) -&gt; Income_App.ContentView"
                   moduleName = "Income App.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rahulshah_73/Desktop/Income%20App/Income%20App/ContentView.swift"
@@ -48,11 +48,11 @@
                   endingLineNumber = "12">
                </Location>
                <Location
-                  uuid = "D3D46D97-F644-4CBF-BC39-23E51192D28C - 4a41d37d5c02d9a7"
+                  uuid = "D3D46D97-F644-4CBF-BC39-23E51192D28C - f3a937e67a824c80"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Income_App.ContentView.init(showAddTransactionView: Swift.Bool, transactionToEdit: Swift.Optional&lt;Income_App.TranscationsModel&gt;, showSettingsView: Swift.Bool) -&gt; Income_App.ContentView"
+                  symbolName = "Income_App.ContentView.init(showAddTransactionView: Swift.Bool, transactionToEdit: Swift.Optional&lt;Income_App.TranscationsModel&gt;, showSettingsView: Swift.Bool, orderDescinding: Swift.Bool, filterMinimum: Swift.Double, currency: Income_App.Currency) -&gt; Income_App.ContentView"
                   moduleName = "Income App.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rahulshah_73/Desktop/Income%20App/Income%20App/ContentView.swift"
@@ -74,38 +74,38 @@
             filePath = "Income App/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "86B14352-FADB-453F-B3E8-920254351A44 - 8fe1a6f89e350a5a"
+                  uuid = "86B14352-FADB-453F-B3E8-920254351A44 - d579566211a50aa3"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Income_App.TranscationsModel) -&gt; SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.foregroundStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of Income_App.ContentView.BalanceView() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.scrollContentBackground(SwiftUI.Visibility) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of Income_App.ContentView.FloatingButton() -&gt; some&gt;&gt;.0)&gt; in closure #2 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationDestination&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, destination: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in Income_App.ContentView.body.getter : some"
+                  symbolName = "closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of Income_App.ContentView.BalanceView() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.scrollContentBackground(SwiftUI.Visibility) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of Income_App.ContentView.FloatingButton() -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.VStack&lt;SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.sheet&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, onDismiss: Swift.Optional&lt;() -&gt; ()&gt;, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in Income_App.ContentView.body.getter : some"
                   moduleName = "Income App.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rahulshah_73/Desktop/Income%20App/Income%20App/ContentView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "170"
-                  endingLineNumber = "170">
+                  startingLineNumber = "179"
+                  endingLineNumber = "179">
                </Location>
                <Location
-                  uuid = "86B14352-FADB-453F-B3E8-920254351A44 - 6b3df9d46f67931b"
+                  uuid = "86B14352-FADB-453F-B3E8-920254351A44 - 628dc545226da978"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Income_App.TranscationsModel) -&gt; SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.foregroundStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of Income_App.ContentView.BalanceView() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.scrollContentBackground(SwiftUI.Visibility) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of Income_App.ContentView.FloatingButton() -&gt; some&gt;&gt;.0)&gt; in closure #2 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationDestination&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, destination: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in Income_App.ContentView.body.getter : some"
+                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of Income_App.ContentView.BalanceView() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.scrollContentBackground(SwiftUI.Visibility) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of Income_App.ContentView.FloatingButton() -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.VStack&lt;SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.sheet&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, onDismiss: Swift.Optional&lt;() -&gt; ()&gt;, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in Income_App.ContentView.body.getter : some"
                   moduleName = "Income App.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rahulshah_73/Desktop/Income%20App/Income%20App/ContentView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "171"
-                  endingLineNumber = "171">
+                  startingLineNumber = "181"
+                  endingLineNumber = "181">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -120,38 +120,38 @@
             filePath = "Income App/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "9619898B-3665-4C71-BB13-79C11B6D81B5 - 8fe1a6f89e350a5a"
+                  uuid = "9619898B-3665-4C71-BB13-79C11B6D81B5 - 628dc545226da978"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Income_App.TranscationsModel) -&gt; SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.foregroundStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of Income_App.ContentView.BalanceView() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.scrollContentBackground(SwiftUI.Visibility) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of Income_App.ContentView.FloatingButton() -&gt; some&gt;&gt;.0)&gt; in closure #2 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationDestination&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, destination: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in Income_App.ContentView.body.getter : some"
+                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of Income_App.ContentView.BalanceView() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.scrollContentBackground(SwiftUI.Visibility) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of Income_App.ContentView.FloatingButton() -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.VStack&lt;SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.sheet&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, onDismiss: Swift.Optional&lt;() -&gt; ()&gt;, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in Income_App.ContentView.body.getter : some"
                   moduleName = "Income App.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rahulshah_73/Desktop/Income%20App/Income%20App/ContentView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "170"
-                  endingLineNumber = "170">
+                  startingLineNumber = "181"
+                  endingLineNumber = "181">
                </Location>
                <Location
-                  uuid = "9619898B-3665-4C71-BB13-79C11B6D81B5 - 6b3df9d46f67931b"
+                  uuid = "9619898B-3665-4C71-BB13-79C11B6D81B5 - 331082d41e80789f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Income_App.TranscationsModel) -&gt; SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.foregroundStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of Income_App.ContentView.BalanceView() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.scrollContentBackground(SwiftUI.Visibility) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of Income_App.ContentView.FloatingButton() -&gt; some&gt;&gt;.0)&gt; in closure #2 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.navigationDestination&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, destination: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in Income_App.ContentView.body.getter : some"
+                  symbolName = "closure #1 (Income_App.TranscationsModel) -&gt; SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.foregroundStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ShapeStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.DynamicViewContent.onDelete(perform: Swift.Optional&lt;(Foundation.IndexSet) -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of Income_App.ContentView.BalanceView() -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.scrollContentBackground(SwiftUI.Visibility) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of Income_App.ContentView.FloatingButton() -&gt; some&gt;&gt;.0)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.VStack&lt;SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.sheet&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(isPresented: SwiftUI.Binding&lt;Swift.Bool&gt;, onDismiss: Swift.Optional&lt;() -&gt; ()&gt;, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in Income_App.ContentView.body.getter : some"
                   moduleName = "Income App.debug.dylib"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/rahulshah_73/Desktop/Income%20App/Income%20App/ContentView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "171"
-                  endingLineNumber = "171">
+                  startingLineNumber = "183"
+                  endingLineNumber = "183">
                </Location>
             </Locations>
          </BreakpointContent>

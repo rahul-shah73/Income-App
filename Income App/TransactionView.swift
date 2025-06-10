@@ -7,6 +7,8 @@
 
 import SwiftUI
 struct TransactionView: View {
+    @AppStorage("currency") var currency: Currency = .ruppee
+    
     let transaction : TranscationsModel
     var body: some View {
         VStack{
@@ -31,7 +33,7 @@ struct TransactionView: View {
                     HStack{
                         Text(transaction.name)
                         Spacer()
-                        Text(String(transaction.displayAmount))
+                        Text(String(transaction.displayAmount(currency: currency)))
                         
                     }
                     

@@ -17,9 +17,15 @@ struct ContentView: View {
     @State var showSettingsView = false
     
     @AppStorage("orderDescinding") var orderDescinding = false
+    @AppStorage("filterMinimum") var filterMinimum = 0.0
+    @AppStorage("currency") var currency: Currency = .ruppee
+    
+    
         private var displayTransaction : [TranscationsModel]{
             let sortedOrder = orderDescinding ? transactions.sorted (by : { $0.date > $1.date }): transactions.sorted (by:  {$0.date < $1.date })
-        return sortedOrder
+            
+            let filteredTransaction = sortedOrder.filter({ $0.amount > filterMinimum})
+            return filteredTransaction
     }
     var income : String {
         var sumIncome = 0.00
@@ -30,6 +36,7 @@ struct ContentView: View {
         }
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
+        numberFormatter.locale = currency.locale
         return numberFormatter.string(from:sumIncome as  NSNumber) ?? "0.00"
         
     }
@@ -43,6 +50,7 @@ struct ContentView: View {
         }
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
+        numberFormatter.locale = currency.locale
         return numberFormatter.string(from:sumExpense as  NSNumber) ?? "0.00"
         
     }
@@ -60,6 +68,7 @@ struct ContentView: View {
         }
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
+        numberFormatter.locale = currency.locale
         return numberFormatter.string(from:total as NSNumber) ?? "0.00"
         
     }
@@ -195,9 +204,14 @@ struct ContentView: View {
                 AddTransactionView(transactions: $transactions)
             }
             
-            .navigationDestination(isPresented: $showSettingsView, destination: {
+           // .navigationDestination(isPresented: $showSettingsView, destination: {
+              //  SettingView()
+            //})
+            .sheet(isPresented: $showSettingsView, content: {
                 SettingView()
             })
+            
+            
         }
                                    
     }

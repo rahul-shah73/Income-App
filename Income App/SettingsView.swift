@@ -5,8 +5,9 @@
 //  Created by Rahul Shah on 09/06/25.
 //
 
+import Foundation
 
-enum Currency: CaseIterable{
+enum Currency: Int, CaseIterable{
     
     case dollar, ruppee
     
@@ -20,5 +21,12 @@ enum Currency: CaseIterable{
         }
     }
    
-    
+    var locale : Locale{
+        switch self{
+        case .dollar:
+            return Locale(identifier: "en_US")
+        case .ruppee:
+            return Locale(identifier: "en_IND")
+        }
+    }
 }

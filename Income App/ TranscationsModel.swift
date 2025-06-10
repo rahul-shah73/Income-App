@@ -20,9 +20,12 @@ struct TranscationsModel : Identifiable, Hashable {
         
     }
     
-    var displayAmount : String{
+   
+    
+    func displayAmount(currency : Currency) -> String{
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
+        numberFormatter.locale = currency.locale
         return numberFormatter.string(from: NSNumber(value: amount)) ?? ""
     }
     
