@@ -14,7 +14,7 @@ enum Currency: CaseIterable{
         switch self{
             
         case .dollar:
-            return "$"
+            return "USD"
         case .ruppee:
             return "₹"
         }

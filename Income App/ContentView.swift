@@ -9,17 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var transactions :[TranscationsModel] = [
-        TranscationsModel(name: "Apple Buy",type: .expense, date: Date(), amount: 5.50),
-        TranscationsModel(name: "Salary",type: .income, date: Date(), amount: 2.50)
-        
-    ]
+    @State private var transactions :[TranscationsModel] = [ ]
     @State var showAddTransactionView = false
     
     @State var transactionToEdit: TranscationsModel?
     
     @State var showSettingsView = false
     
+    @AppStorage("orderDescinding") var orderDescinding = false
+        private var displayTransaction : [TranscationsModel]{
+            let sortedOrder = orderDescinding ? transactions.sorted (by : { $0.date > $1.date }): transactions.sorted (by:  {$0.date < $1.date })
+        return sortedOrder
+    }
     var income : String {
         var sumIncome = 0.00
         for transaction in transactions {
@@ -168,7 +169,7 @@ struct ContentView: View {
                 BalanceView()
                 List{
                     
-                    ForEach(transactions ){
+                    ForEach(displayTransaction ){
                         transaction in
                       Button(action:{
                             transactionToEdit = transaction

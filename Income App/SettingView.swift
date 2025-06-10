@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingView: View {
-    @State private var orderDescinding = false
+    @AppStorage("orderDescinding")  var orderDescinding = false
     
     @State private var currency: Currency = .ruppee
     @State private var filterMin = 0.0
