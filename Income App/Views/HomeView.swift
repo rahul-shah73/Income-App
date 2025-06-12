@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct HomeView: View {
     
     @State private var transactions :[TranscationsModel] = [ ]
     @State var showAddTransactionView = false
@@ -221,6 +221,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    HomeView()
 }
 

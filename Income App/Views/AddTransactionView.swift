@@ -14,7 +14,7 @@ struct AddTransactionView: View {
     @Environment(\.dismiss) var dismiss
     @State var amount : Double  = 0.00
     
-    @State var transactionType : TransactionType = .expense
+    @State var transactionType : TransactionType = .income
     @State var transactionTitle : String = ""
     
     @State var alertTitle = ""

@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import SwiftUI
+
+
 struct TranscationsModel : Identifiable, Hashable {
     let id =  UUID()
     let name : String

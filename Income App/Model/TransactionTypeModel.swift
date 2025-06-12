@@ -6,7 +6,7 @@
 //
 
 import Foundation
-enum TransactionType: String, CaseIterable, Identifiable{
+enum TransactionType: Int, CaseIterable, Identifiable{
     case expense, income
     
     var id : Self {self}
