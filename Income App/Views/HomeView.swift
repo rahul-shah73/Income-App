@@ -11,11 +11,10 @@ struct HomeView: View {
     
     @State private var transactions :[TranscationsModel] = [ ]
     @State var showAddTransactionView = false
-    
-    @State var transactionToEdit: TranscationsModel?
-    
+    @State var transactionToEdit: TransactionItem?
     @State var showSettingsView = false
     
+    @FetchRequest(sortDescriptors: []) var transactionsCoreData: FetchedResults<TransactionItem>
     @AppStorage("orderDescinding") var orderDescinding = false
     @AppStorage("filterMinimum") var filterMinimum = 0.0
     @AppStorage("currency") var currency: Currency = .ruppee
@@ -91,10 +90,7 @@ struct HomeView: View {
             
         }
     }
-    
-   
-    
-    
+      
     fileprivate  func BalanceView() -> some View {
         NavigationStack{
             ZStack{
@@ -181,13 +177,11 @@ struct HomeView: View {
                     ForEach(displayTransaction ){
                         transaction in
                       Button(action:{
-                            transactionToEdit = transaction
+                          transactionToEdit = transactionToEdit
                       } , label:{
                             TransactionView(transaction :   transaction )
                                 .foregroundStyle(Color.black)
                         })
-                        
-                        
                     }
                     .onDelete(perform: deleteTransactions)
                 }
