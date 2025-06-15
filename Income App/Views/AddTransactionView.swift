@@ -21,7 +21,7 @@ struct AddTransactionView: View {
     @State var alertMessage = ""
     @State var showAlert : Bool = false
     
-    @Binding var transactions : [TranscationsModel]
+   // @Binding var transactions : [TranscationsModel]
     
     @AppStorage("currency") var currency: Currency = .ruppee
     
@@ -126,7 +126,7 @@ struct AddTransactionView: View {
             if let transactionToEdit = transactionToEdit {
                 amount = transactionToEdit.amount
                 transactionTitle = transactionToEdit.WrappedTitle
-                transactionType = transactionToEdit.wrppedType
+                transactionType = transactionToEdit.transactionType
             }
         })
         
@@ -145,5 +145,5 @@ struct AddTransactionView: View {
 }
 
 #Preview {
-    AddTransactionView(transactions: .constant([]))
+    AddTransactionView()
 }

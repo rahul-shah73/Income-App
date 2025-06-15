@@ -156,51 +156,5 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0E86DFEA-9338-4DBB-9748-359C7183E550"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Income App/Views/HomeView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "12"
-            endingLineNumber = "12"
-            landmarkName = "HomeView"
-            landmarkType = "14">
-            <Locations>
-               <Location
-                  uuid = "0E86DFEA-9338-4DBB-9748-359C7183E550 - 4285daa9b8694c02"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "property wrapper backing initializer of Income_App.HomeView.transactions : Swift.Array&lt;Income_App.TranscationsModel&gt;"
-                  moduleName = "Income App.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rahulshah_73/Desktop/Income%20App/Income%20App/Views/HomeView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0">
-               </Location>
-               <Location
-                  uuid = "0E86DFEA-9338-4DBB-9748-359C7183E550 - ca14cf67101b4df6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Income_App.HomeView.init(showAddTransactionView: Swift.Bool, transactionToEdit: Swift.Optional&lt;Income_App.TransactionItem&gt;, showSettingsView: Swift.Bool, transactionsCoreData: SwiftUI.FetchRequest&lt;Income_App.TransactionItem&gt;, orderDescinding: Swift.Bool, filterMinimum: Swift.Double, currency: Income_App.Currency) -&gt; Income_App.HomeView"
-                  moduleName = "Income App.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rahulshah_73/Desktop/Income%20App/Income%20App/Views/HomeView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12"
-                  endingLineNumber = "12">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

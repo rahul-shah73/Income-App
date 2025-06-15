@@ -1,220 +1,185 @@
 //
-//  ContentView.swift
-//  Income App
+//  HomeView.swift
+//  Income
 //
-//  Created by Rahul Shah on 17/05/25.
 //
 
 import SwiftUI
+import CoreData
 
 struct HomeView: View {
     
-    @State private var transactions :[TranscationsModel] = [ ]
-    @State var showAddTransactionView = false
-    @State var transactionToEdit: TransactionItem?
-    @State var showSettingsView = false
+    //We remove transactions and replace it with FetchRequest
+    //@State private var transactions: [Transaction] = []
+    /*
+     A fetch request requires two pieces of information. The entity that you want to query and a sort descriptor that determines the order in which
+     results are returned.
+     */
+    @FetchRequest(sortDescriptors: []) var transactions: FetchedResults<TransactionItem>
+    @State private var showAddTransactionView = false
+    @State private var transactionToEdit: TransactionItem?
     
-    @FetchRequest(sortDescriptors: []) var transactionsCoreData: FetchedResults<TransactionItem>
-    @AppStorage("orderDescinding") var orderDescinding = false
+    @State private var showSettings = false
+    
+    @AppStorage("orderDescending") var orderDescending = false
     @AppStorage("filterMinimum") var filterMinimum = 0.0
-    @AppStorage("currency") var currency: Currency = .ruppee
+    @AppStorage("currency") var currency = Currency.dollar
     
+    @Environment(\.managedObjectContext) private var viewContext
     
-        private var displayTransaction : [TranscationsModel]{
-            let sortedOrder = orderDescinding ? transactions.sorted (by : { $0.date > $1.date }): transactions.sorted (by:  {$0.date < $1.date })
-            
-            let filteredTransaction = sortedOrder.filter({ $0.amount > filterMinimum})
-            return filteredTransaction
-    }
-    var income : String {
-        var sumIncome = 0.00
-        for transaction in transactions {
-            if transaction.type == .income {
-                sumIncome += transaction.amount
-            }
-        }
+    private var numberFormatter: NumberFormatter {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
         numberFormatter.locale = currency.locale
-        return numberFormatter.string(from:sumIncome as  NSNumber) ?? "0.00"
-        
+        return numberFormatter
     }
     
-    var expense : String {
-        var sumExpense = 0.00
-        for transaction in transactions {
-            if transaction.type == .expense {
-                sumExpense += transaction.amount
-            }
+    private var displayTransactions: [TransactionItem] {
+        let sortedTransactions = orderDescending ? transactions.sorted(by: { $0.wrappedDate < $1.wrappedDate }) : transactions.sorted(by: { $0.wrappedDate > $1.wrappedDate })
+        guard filterMinimum > 0 else {
+            return sortedTransactions
         }
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .currency
-        numberFormatter.locale = currency.locale
-        return numberFormatter.string(from:sumExpense as  NSNumber) ?? "0.00"
-        
+        let filteredTransactions = sortedTransactions.filter({ $0.amount > filterMinimum })
+        return filteredTransactions
     }
     
-    
-    var totalBalance : String{
-         var total = 0.00
-        for transaction in transactions {
-            switch transaction.type {
-                case .income:
-                total += transaction.amount
-            case .expense:
-                total -= transaction.amount
-            }
-        }
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .currency
-        numberFormatter.locale = currency.locale
-        return numberFormatter.string(from:total as NSNumber) ?? "0.00"
-        
+    private var expenses: String {
+        let sumExpenses = transactions.filter({ $0.type == TransactionType.expense.rawValue }).reduce(0, { $0 + $1.amount })
+        return numberFormatter.string(from: sumExpenses as NSNumber) ?? "$US0.00"
     }
     
+    private var income: String {
+        let sumIncome = transactions.filter({ $0.type == TransactionType.income.rawValue }).reduce(0, { $0 + $1.amount })
+        return numberFormatter.string(from: sumIncome as NSNumber) ?? "$US0.00"
+    }
     
+    private var total: String {
+        let sumExpenses = transactions.filter({ $0.type == TransactionType.expense.rawValue }).reduce(0, { $0 + $1.amount })
+        let sumIncome = transactions.filter({ $0.type == TransactionType.income.rawValue }).reduce(0, { $0 + $1.amount })
+        let total = sumIncome - sumExpenses
+        return numberFormatter.string(from: total as NSNumber) ?? "$US0.00"
+    }
     
-    fileprivate func FloatingButton() -> some View{
-        VStack{
-            NavigationLink (destination:AddTransactionView(transactions: $transactions), label: {
+    fileprivate func FloatingButton() -> some View {
+        VStack {
+            Spacer()
+            NavigationLink {
+                AddTransactionView()
+            } label: {
                 Text("+")
-                    .font(.system(size: 25, weight : . regular))
-                    .frame(width: 75, height: 75)
-                    .foregroundStyle(.white)
-                
-            })
-            
+                    .font(.largeTitle)
+                    .frame(width: 70, height: 70)
+                    .foregroundStyle(Color.white)
+                    .padding(.bottom, 7)
+                    
+            }
             .background(Color.forestGray)
             .clipShape(Circle())
-            
-            
-        }
-    }
-      
-    fileprivate  func BalanceView() -> some View {
-        NavigationStack{
-            ZStack{
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.forestGray)
-                    .frame(height: 170)
-                    .shadow(color: .black, radius: 8, y: 8)
-                    .padding(10)
-                HStack{
-                    VStack(alignment: .leading){
-                        HStack{
-                            VStack{
-                                Text("BALANCE")
-                                
-                                    .font(.system(size: 20))
-                                    .font(.caption)
-                                    .foregroundStyle(.white)
-                                
-                                
-                                Text("\(totalBalance)")
-                                    .font(.system(size: 42, weight: .semibold))
-                                    .foregroundStyle(.white)
-                            }
-                        }
-                        HStack(spacing: 35){
-                            VStack(alignment: .leading){
-                                Text("Expense")
-                                    .font(.system(size:15, weight: .semibold))
-                                    .foregroundStyle(Color.white)
-                                
-                                Text("\(expense)")
-                                    .font(.system(size:15, weight: .regular))
-                                    .foregroundStyle(Color.white)
-                            }
-                            // .padding(.horizontal,40)
-                            VStack(alignment: .leading){
-                                Text("Income")
-                                    .font(.system(size:15, weight: .semibold))
-                                    .foregroundStyle(Color.white)
-                                
-                                Text("\(income)")
-                                    .font(.system(size:15, weight: .regular))
-                                    .foregroundStyle(Color.white)
-                            }
-                        }
-                    }
-                    .padding(.leading,20)
-                    Spacer()
-                    
-                    //it will slides the things up
-                    
-                }
-                
-            }
-            
-            
         }
     }
     
-     var body: some View {
-        
-        
-         
-        NavigationStack{
-           
-            VStack{
-               
-                Button(action: { showSettingsView = true}, label: {
-                    Image(systemName: "gearshape.fill")
-                        .resizable()
-                        .foregroundStyle(Color.gray)
-                        .frame(width: 30, height: 30)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding(.horizontal, 20)
-                })
-               
-                   
-               
-            }
-            VStack{
-                BalanceView()
-                List{
-                    
-                    ForEach(displayTransaction ){
-                        transaction in
-                      Button(action:{
-                          transactionToEdit = transactionToEdit
-                      } , label:{
-                            TransactionView(transaction :   transaction )
-                                .foregroundStyle(Color.black)
-                        })
+    fileprivate func BalanceView() -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 8)
+                .fill(Color.forestGray)
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("BALANCE")
+                            .font(.caption)
+                            .foregroundStyle(Color.white)
+                        Text("\(total)")
+                            .font(.system(size: 42, weight: .light))
+                            .foregroundStyle(Color.white)
                     }
-                    .onDelete(perform: deleteTransactions)
+                    Spacer()
                 }
-            
-                //.scrollDisabled(true)
-                .scrollContentBackground(.hidden)
+                .padding(.top)
+                
+                HStack(spacing: 25) {
+                    VStack(alignment: .leading) {
+                        Text("Expense")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundStyle(Color.white)
+                        Text("\(expenses)")
+                            .font(.system(size: 15, weight: .regular))
+                            .foregroundStyle(Color.white)
+                    }
+                    VStack(alignment: .leading) {
+                        Text("Income")
+                            .font(.system(size: 15, weight: .semibold))
+                            .foregroundStyle(Color.white)
+                        Text("\(income)")
+                            .font(.system(size: 15, weight: .regular))
+                            .foregroundStyle(Color.white)
+                    }
+                }
+                Spacer()
+            }
+            .padding(.horizontal)
+        }
+        .shadow(color: Color.black.opacity(0.3), radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/, x: 0, y: 5)
+        .frame(height: 150)
+        .padding(.horizontal)
+    }
+    
+    var body: some View {
+        NavigationStack {
+            ZStack {
+                VStack {
+                    BalanceView()
+                    List {
+                        ForEach(displayTransactions) { transaction in
+                            Button(action: {
+                                transactionToEdit = transaction
+                            }, label: {
+                                TransactionView(transaction: transaction)
+                                    .foregroundStyle(.black)
+                            })
+                        }
+                        .onDelete(perform: delete)
+                    }
+                    .scrollContentBackground(.hidden)
+                }
                 FloatingButton()
             }
-            
-            .navigationDestination(item: $transactionToEdit, destination: { transactionToEdit in
-                AddTransactionView(transactions: $transactions, transactionToEdit : transactionToEdit)
-            })
-            .navigationDestination(isPresented: $showAddTransactionView) {
-                AddTransactionView(transactions: $transactions)
-            }
-            
-           // .navigationDestination(isPresented: $showSettingsView, destination: {
-              //  SettingView()
-            //})
-            .sheet(isPresented: $showSettingsView, content: {
+            .sheet(isPresented: $showSettings, content: {
                 SettingView()
             })
-            
-            
+            .navigationTitle("Income")
+            .navigationDestination(item: $transactionToEdit, destination: { transactionToEdit in
+                AddTransactionView(transactionToEdit: transactionToEdit)
+            })
+            .navigationDestination(isPresented: $showAddTransactionView, destination: {
+                AddTransactionView()
+            })
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        showSettings = true
+                    }, label: {
+                        Image(systemName: "gearshape.fill")
+                            .foregroundStyle(Color.black)
+                    })
+                }
+            }
         }
-                                   
     }
-    private func deleteTransactions(at offSets : IndexSet){
-        transactions.remove(atOffsets : offSets)
+    
+    private func delete(at offsets: IndexSet) {
+        for index in offsets {
+            let transaction = transactions[index]
+            viewContext.delete(transaction)
+        }
     }
+    
 }
 
 #Preview {
-    HomeView()
+    
+//    let dataManager = DataManager.preview
+//    return HomeView()
+//        .environment(\.managedObjectContext, dataManager.container.viewContext)
 }
+
 

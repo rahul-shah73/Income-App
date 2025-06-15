@@ -42,12 +42,24 @@ extension TransactionItem {
         return amount
     }
     
-    var wrappedDate : Date {
+    var displayDate : Date {
         return date ?? Date()
     }
     
-    var wrppedType : TransactionType{
+    var wrappedDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        return dateFormatter.string(from: displayDate)
+    }
+    
+    var transactionType : TransactionType{
         return TransactionType(rawValue: Int(type))!
         
+    }
+    func display(currency: Currency) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .currency
+        numberFormatter.locale = currency.locale
+        return numberFormatter.string(from: amount as NSNumber) ?? ""
     }
 }

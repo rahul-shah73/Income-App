@@ -7,14 +7,15 @@
 
 import SwiftUI
 struct TransactionView: View {
+    let transaction : TransactionItem
     @AppStorage("currency") var currency: Currency = .ruppee
     
-    let transaction : TranscationsModel
+   
     var body: some View {
         VStack{
             HStack{
                 Spacer()
-                Text(transaction.displayDate)
+                Text(transaction.wrappedDate)
                     .font(.system(size: 14, weight : .light))
                 Spacer()
             }
@@ -24,16 +25,16 @@ struct TransactionView: View {
             
             HStack{
                 
-                Image(systemName : transaction.type == .income ? "arrow.down.forward" : "arrow.up.forward")
+                Image(systemName : transaction.transactionType == .income ? "arrow.down.forward" : "arrow.up.forward")
                     .font(.system(size: 20, weight : .bold))
-                    .foregroundStyle(transaction.type == .income ? .green : .red)
+                    .foregroundStyle(transaction.transactionType == .income ? .green : .red)
                 
                 
                 VStack(alignment: .leading, spacing: 2){
                     HStack{
-                        Text(transaction.name)
+                        Text(transaction.WrappedTitle)
                         Spacer()
-                        Text(String(transaction.displayAmount(currency: currency)))
+                        Text(String(transaction.display(currency: currency)))
                         
                     }
                     
@@ -51,5 +52,5 @@ struct TransactionView: View {
 }
 
 #Preview {
-    TransactionView(transaction : TranscationsModel(name: "Apple Buy",type: .expense, date: Date(), amount: 5.50))
+    TransactionView(transaction : TransactionItem())
 }
