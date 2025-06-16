@@ -178,7 +178,7 @@ struct HomeView: View {
 #Preview {
     
 //    let dataManager = DataManager.preview
-//    return HomeView()
+     HomeView()
 //        .environment(\.managedObjectContext, dataManager.container.viewContext)
 }
 
