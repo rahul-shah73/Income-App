@@ -10,16 +10,16 @@ import SwiftUI
 import SwiftData
 
 @Model class TransactionModel {
-    let id : UUID
-    var title : String
-    var type : TransactionType
-    let date : Date
+    var id : UUID
+    var name : String
+    var  type : TransactionType
+    var date : Date
     var amount : Double
     
-    init(id : UUID, title: String, type: TransactionType, date: Date, amount: Double){
+    init(id : UUID, name: String, type: TransactionType, date: Date, amount: Double){
         
         self.id = UUID()
-        self.title = title
+        self.name = name
         self.type = type
         self.date = date
         self.amount = amount
