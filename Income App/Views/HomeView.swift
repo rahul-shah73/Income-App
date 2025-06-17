@@ -6,19 +6,16 @@
 
 import SwiftUI
 import CoreData
+import SwiftData
 
 struct HomeView: View {
     
-    //We remove transactions and replace it with FetchRequest
-    //@State private var transactions: [Transaction] = []
-    /*
-     A fetch request requires two pieces of information. The entity that you want to query and a sort descriptor that determines the order in which
-     results are returned.
-     */
+
     @FetchRequest(sortDescriptors: []) var transactions: FetchedResults<TransactionItem>
     @State private var showAddTransactionView = false
     @State private var transactionToEdit: TransactionItem?
     
+    @Query var transactionSwiftData : [TransactionModel]
     @State private var showSettings = false
     
     @AppStorage("orderDescending") var orderDescending = false
@@ -26,6 +23,8 @@ struct HomeView: View {
     @AppStorage("currency") var currency = Currency.dollar
     
     @Environment(\.managedObjectContext) private var viewContext
+   
+    
     
     private var numberFormatter: NumberFormatter {
         let numberFormatter = NumberFormatter()
@@ -34,8 +33,10 @@ struct HomeView: View {
         return numberFormatter
     }
     
-    private var displayTransactions: [TransactionItem] {
-        let sortedTransactions = orderDescending ? transactions.sorted(by: { $0.wrappedDate < $1.wrappedDate }) : transactions.sorted(by: { $0.wrappedDate > $1.wrappedDate })
+    
+    
+    private var displayTransactions: [TransactionModel] {
+        let sortedTransactions = orderDescending ? transactionSwiftData.sorted(by: { $0.date < $1.date }) : transactionSwiftData.sorted(by: { $0.date > $1.date })
         guard filterMinimum > 0 else {
             return sortedTransactions
         }
@@ -43,22 +44,27 @@ struct HomeView: View {
         return filteredTransactions
     }
     
+    
+    
     private var expenses: String {
-        let sumExpenses = transactions.filter({ $0.type == TransactionType.expense.rawValue }).reduce(0, { $0 + $1.amount })
+        let sumExpenses = transactionSwiftData.filter({ $0.type == .expense }).reduce(0, { $0 + $1.amount })
         return numberFormatter.string(from: sumExpenses as NSNumber) ?? "$US0.00"
     }
     
+    
     private var income: String {
-        let sumIncome = transactions.filter({ $0.type == TransactionType.income.rawValue }).reduce(0, { $0 + $1.amount })
+        let sumIncome = transactionSwiftData.filter({ $0.type == .income }).reduce(0, { $0 + $1.amount })
         return numberFormatter.string(from: sumIncome as NSNumber) ?? "$US0.00"
     }
     
+    
     private var total: String {
-        let sumExpenses = transactions.filter({ $0.type == TransactionType.expense.rawValue }).reduce(0, { $0 + $1.amount })
-        let sumIncome = transactions.filter({ $0.type == TransactionType.income.rawValue }).reduce(0, { $0 + $1.amount })
+        let sumExpenses = transactionSwiftData.filter({ $0.type == .expense }).reduce(0, { $0 + $1.amount })
+        let sumIncome = transactionSwiftData.filter({ $0.type == .income }).reduce(0, { $0 + $1.amount })
         let total = sumIncome - sumExpenses
         return numberFormatter.string(from: total as NSNumber) ?? "$US0.00"
     }
+    
     
     fileprivate func FloatingButton() -> some View {
         VStack {
@@ -77,6 +83,7 @@ struct HomeView: View {
             .clipShape(Circle())
         }
     }
+    
     
     fileprivate func BalanceView() -> some View {
         ZStack {
@@ -123,6 +130,7 @@ struct HomeView: View {
         .padding(.horizontal)
     }
     
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -130,12 +138,14 @@ struct HomeView: View {
                     BalanceView()
                     List {
                         ForEach(displayTransactions) { transaction in
-                            Button(action: {
-                                transactionToEdit = transaction
-                            }, label: {
-                                TransactionView(transaction: transaction)
-                                    .foregroundStyle(.black)
-                            })
+                            TransactionView(transaction: transaction)
+                                .foregroundStyle(.black)
+//                            Button(action: {
+//                                transactionToEdit = transaction
+//                            }, label: {
+//                                TransactionView(transaction: transaction)
+//                                    .foregroundStyle(.black)
+//                            })
                         }
                         .onDelete(perform: delete)
                     }

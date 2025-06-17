@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import SwiftData
+
 
 struct AddTransactionView: View {
     
@@ -16,7 +18,6 @@ struct AddTransactionView: View {
     
     @State var transactionType : TransactionType = .expense
     @State var transactionTitle : String = ""
-    
     @State var alertTitle = ""
     @State var alertMessage = ""
     @State var showAlert : Bool = false
@@ -26,6 +27,8 @@ struct AddTransactionView: View {
     @AppStorage("currency") var currency: Currency = .ruppee
     
     @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.modelContext) private var context
+    
     
     var transactionToEdit : TransactionItem?
     
@@ -83,18 +86,16 @@ struct AddTransactionView: View {
                     }
                     
                     } else {
-                        let transaction = TransactionItem(context: viewContext)
-                        transaction.title = transactionTitle
-                        transaction.amount = amount
-                        transaction.date = Date()
-                        transaction.id = UUID()
-                        transaction.type = Int16(transactionType.rawValue)
+                        let transaction = TransactionModel(id: UUID(), name: transactionTitle, type: transactionType, date: Date(), amount: amount)
+                        
+                        context.insert(transaction)
+                        
                         do{
                             try
-                                viewContext.save()
+                            context.save()
                         }catch {
                             alertTitle = " Something Went Wrong!"
-                            alertMessage = "Could not update the transaction right now!"
+                            alertMessage = "Could not add the transaction right now!"
                             showAlert = true
                             return
                         }
