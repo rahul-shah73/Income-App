@@ -26,11 +26,11 @@ struct AddTransactionView: View {
     
     @AppStorage("currency") var currency: Currency = .ruppee
     
-    @Environment(\.managedObjectContext) var viewContext
+  @Environment(\.managedObjectContext) var viewContext
     @Environment(\.modelContext) private var context
     
     
-    var transactionToEdit : TransactionItem?
+    var transactionToEdit : TransactionModel?
     
     var numberFormatter : NumberFormatter {
         let numberFormatter = NumberFormatter()
@@ -74,10 +74,10 @@ struct AddTransactionView: View {
                 
                 if let transactionToEdit = transactionToEdit {
                     transactionToEdit.title = transactionTitle
-                    transactionToEdit.type = Int16(transactionType.rawValue)
-                    transactionToEdit.amount = amount
+                    transactionToEdit.type = transactionType
+                   
                     do {
-                        try viewContext.save()
+                        try context.save()
                     }catch{
                         alertTitle = " Something Went Wrong!"
                         alertMessage = "Could not update the transaction right now!"
@@ -86,7 +86,7 @@ struct AddTransactionView: View {
                     }
                     
                     } else {
-                        let transaction = TransactionModel(id: UUID(), name: transactionTitle, type: transactionType, date: Date(), amount: amount)
+                        let transaction = TransactionModel(id: UUID(), title: transactionTitle, type: transactionType, date: Date(), amount: amount)
                         
                         context.insert(transaction)
                         
@@ -126,8 +126,8 @@ struct AddTransactionView: View {
         .onAppear(perform: {
             if let transactionToEdit = transactionToEdit {
                 amount = transactionToEdit.amount
-                transactionTitle = transactionToEdit.WrappedTitle
-                transactionType = transactionToEdit.transactionType
+                transactionTitle = transactionToEdit.title
+                transactionType = transactionToEdit.type
             }
         })
         

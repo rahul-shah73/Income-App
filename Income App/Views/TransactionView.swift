@@ -32,7 +32,7 @@ struct TransactionView: View {
                 
                 VStack(alignment: .leading, spacing: 2){
                     HStack{
-                        Text(transaction.name)
+                        Text(transaction.title)
                         Spacer()
                         Text(String(transaction.displayAmount(currency: currency)))
                         
@@ -52,5 +52,5 @@ struct TransactionView: View {
 }
 
 #Preview {
-    TransactionView(transaction : TransactionModel(id: UUID(), name: "Apple", type: .expense, date: Date(), amount: 5.00))
+    TransactionView(transaction : TransactionModel(id: UUID(), title: "Apple", type: .expense, date: Date(), amount: 5.00))
 }

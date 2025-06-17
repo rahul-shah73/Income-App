@@ -10,10 +10,10 @@ import SwiftData
 
 struct HomeView: View {
     
-
-    @FetchRequest(sortDescriptors: []) var transactions: FetchedResults<TransactionItem>
+//
+//    @FetchRequest(sortDescriptors: []) var transactions: FetchedResults<TransactionItem>
     @State private var showAddTransactionView = false
-    @State private var transactionToEdit: TransactionItem?
+    @State private var transactionToEdit: TransactionModel?
     
     @Query var transactionSwiftData : [TransactionModel]
     @State private var showSettings = false
@@ -23,7 +23,7 @@ struct HomeView: View {
     @AppStorage("currency") var currency = Currency.dollar
     
     @Environment(\.managedObjectContext) private var viewContext
-   
+    @Environment(\.modelContext) private var modelContext
     
     
     private var numberFormatter: NumberFormatter {
@@ -132,20 +132,20 @@ struct HomeView: View {
     
     
     var body: some View {
+        
         NavigationStack {
             ZStack {
                 VStack {
                     BalanceView()
                     List {
                         ForEach(displayTransactions) { transaction in
-                            TransactionView(transaction: transaction)
-                                .foregroundStyle(.black)
-//                            Button(action: {
-//                                transactionToEdit = transaction
-//                            }, label: {
-//                                TransactionView(transaction: transaction)
-//                                    .foregroundStyle(.black)
-//                            })
+                           
+                            Button(action: {
+                                transactionToEdit = transaction
+                            }, label: {
+                                TransactionView(transaction: transaction)
+                                    .foregroundStyle(.black)
+                            })
                         }
                         .onDelete(perform: delete)
                     }
@@ -178,8 +178,8 @@ struct HomeView: View {
     
     private func delete(at offsets: IndexSet) {
         for index in offsets {
-            let transaction = transactions[index]
-            viewContext.delete(transaction)
+            let transaction = displayTransactions[index]
+            modelContext.delete(transaction)
         }
     }
     
