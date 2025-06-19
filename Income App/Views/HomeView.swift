@@ -15,7 +15,7 @@ struct HomeView: View {
     @State private var showAddTransactionView = false
     @State private var transactionToEdit: TransactionModel?
     
-    @Query var transactionSwiftData : [TransactionModel]
+    @Query var transactions : [TransactionModel]
     @State private var showSettings = false
     
     @AppStorage("orderDescending") var orderDescending = false
@@ -36,7 +36,7 @@ struct HomeView: View {
     
     
     private var displayTransactions: [TransactionModel] {
-        let sortedTransactions = orderDescending ? transactionSwiftData.sorted(by: { $0.date < $1.date }) : transactionSwiftData.sorted(by: { $0.date > $1.date })
+        let sortedTransactions = orderDescending ? transactions.sorted(by: { $0.date < $1.date }) : transactions.sorted(by: { $0.date > $1.date })
         guard filterMinimum > 0 else {
             return sortedTransactions
         }
@@ -47,20 +47,20 @@ struct HomeView: View {
     
     
     private var expenses: String {
-        let sumExpenses = transactionSwiftData.filter({ $0.type == .expense }).reduce(0, { $0 + $1.amount })
+        let sumExpenses = transactions.filter({ $0.type == .expense }).reduce(0, { $0 + $1.amount })
         return numberFormatter.string(from: sumExpenses as NSNumber) ?? "$US0.00"
     }
     
     
     private var income: String {
-        let sumIncome = transactionSwiftData.filter({ $0.type == .income }).reduce(0, { $0 + $1.amount })
+        let sumIncome = transactions.filter({ $0.type == .income }).reduce(0, { $0 + $1.amount })
         return numberFormatter.string(from: sumIncome as NSNumber) ?? "$US0.00"
     }
     
     
     private var total: String {
-        let sumExpenses = transactionSwiftData.filter({ $0.type == .expense }).reduce(0, { $0 + $1.amount })
-        let sumIncome = transactionSwiftData.filter({ $0.type == .income }).reduce(0, { $0 + $1.amount })
+        let sumExpenses = transactions.filter({ $0.type == .expense }).reduce(0, { $0 + $1.amount })
+        let sumIncome = transactions.filter({ $0.type == .income }).reduce(0, { $0 + $1.amount })
         let total = sumIncome - sumExpenses
         return numberFormatter.string(from: total as NSNumber) ?? "$US0.00"
     }
@@ -187,9 +187,9 @@ struct HomeView: View {
 
 #Preview {
     
-//    let dataManager = DataManager.preview
-     HomeView()
-//        .environment(\.managedObjectContext, dataManager.container.viewContext)
+    let previewContainer = PreviewHelper.previewContainer
+    return HomeView()
+        .modelContainer(previewContainer)
 }
 
 
