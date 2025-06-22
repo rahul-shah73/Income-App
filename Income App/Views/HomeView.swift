@@ -4,6 +4,8 @@
 //
 // Created by Rahul Shah on 18/05/25.
 //Learing the fundamentsls of realm
+
+//Trying to fix the error in the realm package where it has been set to static but trying to set it ddynamic
 import SwiftUI
 import CoreData
 import SwiftData
