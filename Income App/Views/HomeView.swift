@@ -3,7 +3,7 @@
 //  Income
 //
 // Created by Rahul Shah on 18/05/25.
-
+//Learing the fundamentsls of realm
 import SwiftUI
 import CoreData
 import SwiftData
